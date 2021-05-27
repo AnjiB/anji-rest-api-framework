@@ -1,16 +1,13 @@
 package com.anji.framework.commons.config;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
-//import org.slf4j.LoggerFactory;
-//import org.slf4j.Logger;
-
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.error.YAMLException;
 
 
 /**
@@ -21,8 +18,6 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class ConfigLoader {
 	
-	private static final Logger LOGGER = Logger.getLogger(ConfigLoader.class);
-
 	private static Map<String, String> config = new HashMap<String, String>();
 
 
@@ -41,6 +36,7 @@ public class ConfigLoader {
 			autEnvironment = "DEV";
 		}
 
+		// to be used further to know current running environment
 		config.put("AUT_ENVIRONMENT", autEnvironment);
 
 		loadAppConfiguration(autEnvironment);
@@ -60,13 +56,13 @@ public class ConfigLoader {
 	@SuppressWarnings("unchecked")
 	private static void loadAppConfiguration(String autEnvironment) {
 		Yaml yaml = new Yaml();
-		try {
-			InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream("appConfiguration.yaml");
+		try(InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream("appConfiguration.yaml")) {
 			Map<String, Map<String, String>> YFile = (Map<String, Map<String, String>>) yaml.load(input);
-			// addToConfig(YFile.get("APP"));
 			addToConfig(YFile.get(autEnvironment));
-		} catch (org.yaml.snakeyaml.error.YAMLException ye) {
-			LOGGER.error(ye.getMessage());
+		} catch (YAMLException ye) {
+			ye.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

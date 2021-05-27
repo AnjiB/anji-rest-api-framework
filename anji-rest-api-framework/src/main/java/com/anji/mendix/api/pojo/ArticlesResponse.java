@@ -1,6 +1,5 @@
 package com.anji.mendix.api.pojo;
 
-
 import java.util.List;
 
 import com.anji.mendix.api.asserts.ArticlesResponseAssert;
@@ -8,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Articles Response POJO
+ *  
  * @author boddupally.anji
  */
 

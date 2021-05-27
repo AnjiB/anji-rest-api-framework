@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Error POJO
+ * 
  * @author boddupally.anji
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -7,11 +7,17 @@ import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
 import com.anji.mendix.api.pojo.Request;
 import com.anji.mendix.api.pojo.User;
 
+/**
+ * 
+ * Test Data Factory which gives us different test data objects to be used in tests for various scenarios
+ * 
+ * @author boddupally.anji
+ */
 public class TestDataFactory {
 
 	public static User getValidUser() {
-		return new User.Builder().withUsername("testuser" + RandomStringUtils.randomAlphanumeric(5))
-				.withPassword("wachtwoord").withEmail(RandomStringUtils.randomAlphanumeric(5) + "@example.com").build();
+		return new User.Builder().withUsername("testuser" + RandomStringUtils.randomAlphanumeric(5).toLowerCase())
+				.withPassword("wachtwoord").withEmail(RandomStringUtils.randomAlphanumeric(5).toLowerCase() + "@example.com").build();
 	}
 
 	public static Request getValidUserRequest() {

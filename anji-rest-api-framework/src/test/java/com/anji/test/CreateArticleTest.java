@@ -1,11 +1,13 @@
 package com.anji.test;
 
+import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
 
-import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.anji.framework.api.builder.RequestBuilder;
@@ -23,37 +25,39 @@ import com.anji.mendix.api.service.RegisterService;
 import com.google.common.collect.Maps;
 
 public class CreateArticleTest {
-
-	public static final String ARTICLES = "/api/articles";
 	
 	private Request userRequest;
 
-	private CreateArticleService creatArticle = CreateArticleService.getInstance();
+	private CreateArticleService creatArticle;
 
-	private GetArticlesService getArticleService = GetArticlesService.getInstance();
+	private GetArticlesService getArticleService;
 	
-	private LoginService loginService = LoginService.getInstance();
+	private LoginService loginService ;
 
-	@BeforeTest
+	@BeforeMethod
 	public void registerUser() throws Exception {
 
-		Request registerUserRequest = TestDataFactory.getValidUserRequest();
+		creatArticle = CreateArticleService.getInstance();
+		getArticleService = GetArticlesService.getInstance();
+		loginService = LoginService.getInstance();
+		
+		userRequest = TestDataFactory.getValidUserRequest();
 		RegisterService registerService = RegisterService.getInstance();
-		registerService.registerUser(registerUserRequest);
+		registerService.registerUser(userRequest);
 
 	}
 
 	/*
 	 * Testing Create Article flow..
 	 */
-	@Test
+	@Test(description = "Testing if valid user can create the article or not")
 	public void testCreateArticle() throws Exception {
 
 		ArticleRequestAndResponse requestObject = TestDataFactory.getValidArticle();
 
 		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(), requestObject);
 
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
 		ArticleRequestAndResponse aResponse = response.getResponse();
 
 		aResponse.articleAssertThat().thereIsNoError().articleBodyIs(requestObject.getArticle().getBody())
@@ -66,22 +70,22 @@ public class CreateArticleTest {
 		queryParam.put(Filter.author.name(), userRequest.getUser().getUsername());
 
 		ApiResponse<ArticlesResponse> articlesResponse = getArticleService.getArticles(queryParam);
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
 		articlesResponse.getResponse().assertThat().articleCountIs(1);
 
 	}
-
+	
 	/*
 	 * Testing Create Article flow with special characters
 	 */
-	//@Test
+	@Test(description = "Testing if valid user can create the article or not with special characters")
 	public void testCreateArticleWithSpecialCharacters() throws Exception {
 		
 		ArticleRequestAndResponse requestObject = TestDataFactory.getValidArticle();
 
 		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(), requestObject);
 
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
 		ArticleRequestAndResponse aResponse = response.getResponse();
 
 		aResponse.articleAssertThat().thereIsNoError().articleBodyIs(requestObject.getArticle().getBody())
@@ -94,7 +98,7 @@ public class CreateArticleTest {
 		queryParam.put(Filter.author.name(), userRequest.getUser().getUsername());
 
 		ApiResponse<ArticlesResponse> articlesResponse = getArticleService.getArticles(queryParam);
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
 		articlesResponse.getResponse().assertThat().articleCountIs(1);
 
 	}
@@ -102,25 +106,26 @@ public class CreateArticleTest {
 	/*
 	 * Testing create article flow without authorization
 	 */
-	//@Test
+	@Test(description = "Testing if user can create the article without token or not")
 	public void testArticleCannotBeCreatedWithoutAuthorization() throws Exception {
 
 		ArticleRequestAndResponse requestObject = TestDataFactory.getValidArticle();
 		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(), requestObject, false);
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_UNAUTHORIZED);
+		assertThat(response.getResponseCode()).isEqualTo(SC_UNAUTHORIZED);
 		response.getResponse().articleAssertThat()
 				.thereIsAnError()
 				.errorAssert()
 				.errorMessageIs("No authorization token was found")
-				.errorStatusIs(HttpStatus.SC_UNAUTHORIZED);
+				.errorStatusIs(SC_UNAUTHORIZED);
 
 	}
 
 	/*
-	 * Testing create article flow with previous token
+	 * This test is failing and it is a security issue. 
+	 * Token should be invalidated as soon as user obtains new one.
 	 */
 
-	//@Test
+	@Test(description = "Testing if user can create the article with existing token.")
 	public void testCreateArticleWithPreviousAuthToken() throws Exception {
 		
 		ArticleRequestAndResponse requestObject = TestDataFactory.getValidArticle();
@@ -134,13 +139,13 @@ public class CreateArticleTest {
 				.build();
 		ApiResponse<ArticleRequestAndResponse> response = new PostApiImpl<>(ArticleRequestAndResponse.class).post(builder);
 
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
 		ArticleRequestAndResponse aResponse = response.getResponse();
 
 		aResponse.articleAssertThat().thereIsNoError().articleBodyIs(requestObject.getArticle().getBody())
 				.articleDescriptionIs(requestObject.getArticle().getDescription())
 				.articleTitleIs(requestObject.getArticle().getTitle())
-				.articleTagListIs(requestObject.getArticle().getTagList()).authorIs(userRequest.getUser().getEmail());
+				.articleTagListIs(requestObject.getArticle().getTagList()).authorIs(userRequest.getUser().getUsername());
 
 		// login again to get new token
 		loginService.login(userRequest);
@@ -156,7 +161,7 @@ public class CreateArticleTest {
 				.build();
 		response = new PostApiImpl<>(ArticleRequestAndResponse.class).post(builder);
 		
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_UNAUTHORIZED);
+		assertThat(response.getResponseCode()).isEqualTo(SC_UNAUTHORIZED);
 
 	}
 

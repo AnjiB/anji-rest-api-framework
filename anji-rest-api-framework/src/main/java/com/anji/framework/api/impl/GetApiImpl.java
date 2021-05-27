@@ -1,12 +1,9 @@
 package com.anji.framework.api.impl;
 
-
-
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.http.client.methods.HttpGet;
 
 import com.anji.framework.api.builder.RequestBuilder;
-
 
 /**
  * 

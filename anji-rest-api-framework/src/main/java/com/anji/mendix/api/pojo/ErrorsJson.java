@@ -3,6 +3,8 @@ package com.anji.mendix.api.pojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Errors POJO
+ * 
  * @author boddupally.anji
  */
 

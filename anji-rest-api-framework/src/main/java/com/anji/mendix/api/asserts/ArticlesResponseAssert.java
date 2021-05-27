@@ -7,8 +7,6 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.anji.mendix.api.pojo.ArticlesResponse;
 
-
-
 /**
  * Article Response Assertions
  * 

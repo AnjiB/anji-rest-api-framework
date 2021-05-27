@@ -3,8 +3,9 @@ package com.anji.framework.api.impl;
 
 import java.util.Map;
 
-
 /**
+ * Holds the response information from the client.
+ * 
  * @author boddupally.anji
  *
  */

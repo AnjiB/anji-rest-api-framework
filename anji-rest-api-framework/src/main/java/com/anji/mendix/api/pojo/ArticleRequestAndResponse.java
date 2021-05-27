@@ -1,12 +1,12 @@
 package com.anji.mendix.api.pojo;
 
-
-
 import com.anji.mendix.api.asserts.ArticleResponseAssert;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Article Request/Response Pojo
+ * 
  * @author boddupally.anji
  */
 

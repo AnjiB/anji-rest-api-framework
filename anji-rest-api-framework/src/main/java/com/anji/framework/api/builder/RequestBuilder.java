@@ -363,12 +363,12 @@ public class RequestBuilder {
 		}
 		
 		public Builder withAuthRequired(boolean isAuthRequired) {
-			isAuthRequired = this.isAuthRequired;
+			this.isAuthRequired = isAuthRequired;
 			return this;
 		}
 		
 		public Builder withCachedClient() {
-			isClientCached = true;
+			this.isClientCached = true;
 			return this;
 		}
 				

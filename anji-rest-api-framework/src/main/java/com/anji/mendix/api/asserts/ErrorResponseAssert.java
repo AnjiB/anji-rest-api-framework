@@ -6,7 +6,6 @@ import org.assertj.core.api.AbstractAssert;
 
 import com.anji.mendix.api.pojo.ErrorsJson;
 
-
 /**
  * Error Response Assertions
  * 

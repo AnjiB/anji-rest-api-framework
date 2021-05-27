@@ -2,27 +2,45 @@ package com.anji.framework.api.impl;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
+
 import com.anji.framework.api.builder.RequestBuilder;
 import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+/**
+ * This is a service class which gives the client. It also cache the client 
+ * and helps us to re-use the same client if needed.
+ * 
+ * @author boddupally.anji
+ */
 public class ClientService {
 
+	private static final Logger LOGGER = Logger.getLogger(ClientService.class);
+	
+	private static ClientServiceCache cache = ClientServiceCache.getInstance();
+	
 	static Client getClient(RequestBuilder builder) throws Exception {
 
 		Client client = null;
 
-		ClientServiceCache cache = ClientServiceCache.getInstance();
+		
 
 		if (builder.isClientCached()) {
 			client = cache.getClient(builder.getUsername());
 			if (client == null) {
 				client = new Client(builder.getUsername(), builder.getPassword(), builder.isAuthRequired());
+				cache.add(builder.getUsername(), client);
+				LOGGER.info("Cached the client for the user: " + builder.getUsername());
+			} else {
+				LOGGER.info("Obtained the client from the cache for the user: " + builder.getUsername());
 			}
-			cache.add(builder.getUsername(), client);
+			
+			
 		} else {
-			cache.remove(builder.getUsername());
+			if(builder.getUsername() != null)
+				cache.remove(builder.getUsername());
 			client = new Client(builder.getUsername(), builder.getPassword(), builder.isAuthRequired());
 		}
 		return client;
@@ -33,7 +51,7 @@ public class ClientService {
 		Cache<String, Client> cliCache;
 
 		private ClientServiceCache() {
-			cliCache = CacheBuilder.newBuilder().expireAfterWrite(2, TimeUnit.MINUTES).maximumSize(10).build();
+			cliCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES).maximumSize(10).build();
 		}
 
 		public void add(final String username, final Client client) {

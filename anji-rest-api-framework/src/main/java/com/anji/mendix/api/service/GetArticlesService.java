@@ -1,5 +1,6 @@
 package com.anji.mendix.api.service;
 
+import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
 import java.util.Map;
 
 import com.anji.framework.api.builder.RequestBuilder;
@@ -7,9 +8,13 @@ import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.GetApiImpl;
 import com.anji.mendix.api.pojo.ArticlesResponse;
 
+/**
+ * 
+ * Service for get articles api
+ * 
+ * @author boddupally.anji
+ */
 public class GetArticlesService {
-
-	public static final String ARTICLES = "/api/articles";
 
 	private GetArticlesService() {
 

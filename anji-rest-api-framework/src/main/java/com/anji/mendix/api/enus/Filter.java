@@ -1,9 +1,7 @@
 package com.anji.mendix.api.enus;
 
 /**
- * 
- * Request Headers enum
- * 
+ * Enum for Get Article Request query parameter
  * @author boddupally.anji
  */
 

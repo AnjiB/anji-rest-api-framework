@@ -1,14 +1,18 @@
 package com.anji.mendix.api.service;
 
-
+import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
 import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.PostApiImpl;
 import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
 
+/**
+ * 
+ * Service for create article api
+ * 
+ * @author boddupally.anji
+ */
 public class CreateArticleService {
-
-	public static final String ARTICLES = "/api/articles";
 	
 	private CreateArticleService () {
 		

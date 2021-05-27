@@ -3,6 +3,9 @@ package com.anji.framework.api.impl;
 import static com.anji.framework.api.enums.ApiContentType.JSON;
 import static com.anji.framework.api.enums.ApiContentType.XML;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static com.anji.framework.commons.config.ConfigLoader.getConfig;
+import static com.anji.framework.commons.config.ConfigConstants.SUPER_USER;
+import static com.anji.framework.commons.config.ConfigConstants.SUPER_USER_PASSWORD;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -22,6 +25,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -46,6 +50,7 @@ import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.enums.ApiHeaders;
 import com.anji.framework.api.utils.ConvertionUtil;
 import com.anji.framework.commons.config.ConfigLoader;
+import com.anji.mendix.api.constants.EndPoint;
 import com.anji.mendix.api.pojo.Request;
 import com.anji.mendix.api.pojo.Response;
 import com.anji.mendix.api.pojo.User;
@@ -70,45 +75,48 @@ public class Client {
 
 	private HttpClientContext clientContext;
 
+	// In general, tokens should not be exposed
 	private String authToken;
 
-	private String username;
-
-	private String password;
-
 	private String baseURL;
+	
+	private String superUsername = getConfig().get(SUPER_USER);
+	
+	private String superPassword = getConfig().get(SUPER_USER_PASSWORD);
 
 	public Client(String username, String password, int defaultWaitTime, boolean loginRequired) throws Exception {
 		this.defaultWaitTime = defaultWaitTime;
 		this.baseURL = ConfigLoader.getBaseUrl();
-		this.username = username;
-		this.password = password;
 		this.client = getClient();
 
 		if (loginRequired)
-			login();
+			login(username, password);
 	}
 
 	public Client(String username, String password, boolean loginRequired) throws Exception {
 		this(username, password, 120, loginRequired);
 	}
 
-	private void login() throws Exception {
+	private void login(String username, String password) throws Exception {
 
 		Request request = new Request();
 		User user = new User();
-		user.setEmail(this.username);
-		user.setPassword(this.password);
+		// username is actually email
+		user.setEmail(username);
+		user.setPassword(password);
 		request.setUser(user);
-		RequestBuilder builder = new RequestBuilder.Builder().withReqUrl("/api/users/login").withRequestObject(request)
+		RequestBuilder builder = new RequestBuilder.Builder().withReqUrl(EndPoint.LOGIN).withRequestObject(request)
 				.build();
 
 		HttpPost post = new HttpPost();
 
 		ApiOutput output = postOrPatchOrPut(builder, post);
 
-		if (output.getResponseCode() != 200)
+		if (output.getResponseCode() != HttpStatus.SC_OK)
 			throw new HttpException("Login is not success");
+		else {
+			LOGGER.info("Login Response: " + output.getResponseString());
+		}
 
 		Response response = ConvertionUtil.convertJsonStringToPojo(output.getResponseString(), Response.class);
 
@@ -215,12 +223,15 @@ public class Client {
 		}
 
 		Map<ApiHeaders, String> reqHeaders = Maps.newHashMap();
-		if (authToken != null && authToken != "")
-			reqHeaders.put(ApiHeaders.JWT_TOKEN, reqBuilder.getContentType().getContentType());
-		else {
-			String authentication = getAuthHeader(username, password);
-			reqHeaders.put(ApiHeaders.AUTH, authentication);
-		}
+		if (authToken != null && authToken != "") {
+			LOGGER.info("Auth Token: " + authToken);
+			reqHeaders.put(ApiHeaders.JWT_TOKEN, "Token " + authToken);
+		} else 
+			LOGGER.info("Auth token is not provided");
+		
+		String authentication = getAuthHeader(superUsername, superPassword);
+		reqHeaders.put(ApiHeaders.AUTH, authentication);
+		
 		reqHeaders.put(ApiHeaders.CONTENT_TYPE, reqBuilder.getContentType().getContentType());
 		if (reqBuilder.getReqHeaders() != null && !reqBuilder.getReqHeaders().isEmpty())
 			reqHeaders.putAll(reqBuilder.getReqHeaders());

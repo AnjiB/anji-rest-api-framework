@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Article POJO
+ * 
  * @author boddupally.anji
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

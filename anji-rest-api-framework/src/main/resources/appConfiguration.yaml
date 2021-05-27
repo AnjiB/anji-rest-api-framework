@@ -2,8 +2,12 @@ DEV:
    BASE_URL: "https://qa-task.backbasecloud.com"
    USERNAME: ""
    PASSWORD: "wachtwoord"
+   SUPER_USER: "candidatex"
+   SUPER_USER_PASSWORD: "qa-is-cool"
 QA:
   BASE_URL: "https://qa-task.backbasecloud.com"
   USERNAME: ""
   PASSWORD: "wachtwoord"
+  SUPER_USER: "candidatex"
+  SUPER_USER_PASSWORD: "qa-is-cool"
   
