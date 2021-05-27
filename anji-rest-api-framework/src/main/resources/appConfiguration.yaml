@@ -1,0 +1,9 @@
+DEV:
+   BASE_URL: "https://qa-task.backbasecloud.com"
+   USERNAME: ""
+   PASSWORD: "wachtwoord"
+QA:
+  BASE_URL: "https://qa-task.backbasecloud.com"
+  USERNAME: ""
+  PASSWORD: "wachtwoord"
+  
