@@ -32,26 +32,4 @@ public class ErrorResponseAssert extends AbstractAssert<ErrorResponseAssert, Err
 				.as(format(errorInfoMessage, expStatus, actual.getError().getStatus())).isEqualTo(expStatus);
 		return this;
 	}
-	
-	public ErrorResponseAssert usernameErrorMessageIs(String expMessage) {
-		assertThat(actual.getUsername()).as(format(errorInfoMessage, expMessage, actual.getUsername()))
-				.isEqualTo(expMessage);
-		return this;
-	}
-	
-	public ErrorResponseAssert emailErrorMessageIs(String expMessage) {
-		assertThat(actual.getEmail()).as(format(errorInfoMessage, expMessage, actual.getEmail()))
-				.isEqualTo(expMessage);
-		return this;
-	}
-	
-	public ErrorResponseAssert usernameIsNull() {
-		assertThat(actual.getUsername()).isNull();
-		return this;
-	}
-	
-	public ErrorResponseAssert emailIsNull() {
-		assertThat(actual.getEmail()).isNull();
-		return this;
-	}
 }
