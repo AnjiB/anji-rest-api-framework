@@ -39,6 +39,18 @@ public class TestDataFactory {
 		return ar;
 	}
 	
+	public static ArticleRequestAndResponse getArticleObjectWithEmptyValues() {
+		ArticleRequestAndResponse ar = new ArticleRequestAndResponse();	
+		Article article = new Article.Builder()
+				.withArticleTitle("")
+				.withArticleBody("")
+				.withArticleDescription("")
+				.withArticleTags("")
+				.build();
+		ar.setArticle(article);
+		return ar;
+	}
+	
 	public static ArticleRequestAndResponse getValidArticleWithSpecialCharacters() {
 		ArticleRequestAndResponse ar = new ArticleRequestAndResponse();	
 		Article article = new Article.Builder()
