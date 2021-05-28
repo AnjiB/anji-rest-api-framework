@@ -6,6 +6,7 @@ Thanks you providing me an opportunity to work on this assignment. I built a Res
 * [Overview On Framework](#Overview-On-Framework)
 * [Testing](#testing)
 * [How to run the tests](#how-to-run-the-tests)
+* [Reporting](#reporting)
 
 ## Tech Stack Used in Framework
 
@@ -23,7 +24,6 @@ Framework is built on Java and below are the requirements to run the tests
 * Frameworks provides flexibility to invoke any kind of API(POST, PUT, PATCH, GET, DELETE etc) inside test using RestBuilder.
 * Framework creates the log file puts in folder /logs under the root of the project which can be used for debugging.
 * Framework supports parallel test execution as we use TestNG as testing framework
-* At this moment, I am relying on TestNG for reporting. This report can be found inside `/target/CustomReport/` with name `emailable-report.html.`
 * Supports for Data Driven Testing (TestNG Supports Data Driven Testing Using dataProviders)
 
 ## Testing
@@ -34,5 +34,9 @@ Framework is built on Java and below are the requirements to run the tests
 
 ## How to run the tests
 * Go to root folder of the project
-* From the command line execute command `mvn failsafe:integration-test -DautEnvironment=DEV`
+* From the command line execute command `mvn test -Pe2e -DautEnvironment=DEV`
 * If you want to run multiple tests in parallel, please change thread count in [testng.xml](https://github.com/AnjiB/anji-adi/blob/main/anji-ada-api/testng.xml) file.
+
+## Reporting
+* Once the you run the tests, under root folder, you will see a folder with name `target/surefire-reports` will be generated.
+In the folder `surefire-reports` you will see emailable-report.html and index.html which tells you about the overall test status.
