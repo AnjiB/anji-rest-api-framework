@@ -35,7 +35,7 @@ Framework is built on Java and below are the requirements to run the tests
 ## How to run the tests
 * Go to root folder of the project
 * From the command line execute command `mvn test -Pe2e -DautEnvironment=DEV`
-* If you want to run multiple tests in parallel, please change thread count in [testng.xml](https://github.com/AnjiB/anji-adi/blob/main/anji-ada-api/testng.xml) file.
+* If you want to run multiple tests in parallel, please change thread count in [testng.xml](https://github.com/AnjiB/anji-rest-api-framework/blob/main/anji-rest-api-framework/testng.xml) file.
 
 ## Reporting
 * Once the you run the tests, under root folder, you will see a folder with name `target/surefire-reports` will be generated.
