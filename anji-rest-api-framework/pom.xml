@@ -9,10 +9,8 @@
 	<artifactId>anji-rest-api-framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>anji-adidas-assignment</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
-
+	<name>anji-mendix-assignment</name>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -92,12 +90,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-				
-		<dependency>
-    		<groupId>org.apache.commons</groupId>
-    		<artifactId>commons-math3</artifactId>
-   		 	<version>3.6.1</version>
-		</dependency>
+
 	</dependencies>
 
 	<build>
