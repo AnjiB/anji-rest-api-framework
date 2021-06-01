@@ -15,7 +15,7 @@ import com.google.common.cache.CacheBuilder;
  * 
  * @author boddupally.anji
  */
-public class ClientService {
+class ClientService {
 
 	private static final Logger LOGGER = Logger.getLogger(ClientService.class);
 	

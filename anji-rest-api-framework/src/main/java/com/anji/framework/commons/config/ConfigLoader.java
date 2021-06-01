@@ -78,4 +78,8 @@ public class ConfigLoader {
 	public static String getBaseUrl() {
 		return getConfig().get("BASE_URL");
 	}
+	
+	public static String getDefaultPassword() {
+		return getConfig().get("DEFAULT_PASSWORD");
+	}
 }

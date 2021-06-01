@@ -3,9 +3,6 @@ package com.anji.framework.api.impl;
 import static com.anji.framework.api.enums.ApiContentType.JSON;
 import static com.anji.framework.api.enums.ApiContentType.XML;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static com.anji.framework.commons.config.ConfigLoader.getConfig;
-import static com.anji.framework.commons.config.ConfigConstants.SUPER_USER;
-import static com.anji.framework.commons.config.ConfigConstants.SUPER_USER_PASSWORD;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -65,7 +62,7 @@ import com.google.common.collect.Maps;
  * @author boddupally.anji
  *
  */
-public class Client {
+class Client {
 
 	private static final Logger LOGGER = Logger.getLogger(Client.class);
 
@@ -80,11 +77,7 @@ public class Client {
 
 	private String baseURL;
 	
-	private String superUsername = getConfig().get(SUPER_USER);
-	
-	private String superPassword = getConfig().get(SUPER_USER_PASSWORD);
-
-	public Client(String username, String password, int defaultWaitTime, boolean loginRequired) throws Exception {
+	Client(String username, String password, int defaultWaitTime, boolean loginRequired) throws Exception {
 		this.defaultWaitTime = defaultWaitTime;
 		this.baseURL = ConfigLoader.getBaseUrl();
 		this.client = getClient();
@@ -93,7 +86,7 @@ public class Client {
 			login(username, password);
 	}
 
-	public Client(String username, String password, boolean loginRequired) throws Exception {
+	Client(String username, String password, boolean loginRequired) throws Exception {
 		this(username, password, 120, loginRequired);
 	}
 
@@ -225,12 +218,12 @@ public class Client {
 		Map<ApiHeaders, String> reqHeaders = Maps.newHashMap();
 		if (authToken != null && authToken != "") {
 			LOGGER.info("Auth Token: " + authToken);
-			reqHeaders.put(ApiHeaders.JWT_TOKEN, "Token " + authToken);
+			reqHeaders.put(ApiHeaders.AUTH, "Token " + authToken);
 		} else 
 			LOGGER.info("Auth token is not provided");
 		
-		String authentication = getAuthHeader(superUsername, superPassword);
-		reqHeaders.put(ApiHeaders.AUTH, authentication);
+		//String authentication = getAuthHeader(superUsername, superPassword);
+		//reqHeaders.put(ApiHeaders.AUTH, authentication);
 		
 		reqHeaders.put(ApiHeaders.CONTENT_TYPE, reqBuilder.getContentType().getContentType());
 		if (reqBuilder.getReqHeaders() != null && !reqBuilder.getReqHeaders().isEmpty())
@@ -243,6 +236,7 @@ public class Client {
 
 	}
 
+	@SuppressWarnings("unused")
 	private String getAuthHeader(String username, String password) {
 		LOGGER.info(String.format("Authentication Details: Username = %s : Password = %s", username, password));
 		String authH = String.format("%s:%s", username, password);

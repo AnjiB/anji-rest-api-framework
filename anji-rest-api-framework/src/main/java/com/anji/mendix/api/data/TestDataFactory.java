@@ -2,6 +2,7 @@ package com.anji.mendix.api.data;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import com.anji.framework.commons.config.ConfigLoader;
 import com.anji.mendix.api.pojo.Article;
 import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
 import com.anji.mendix.api.pojo.Request;
@@ -17,7 +18,7 @@ public class TestDataFactory {
 
 	public static User getValidUser() {
 		return new User.Builder().withUsername("testuser" + RandomStringUtils.randomAlphanumeric(5).toLowerCase())
-				.withPassword("wachtwoord").withEmail(RandomStringUtils.randomAlphanumeric(5).toLowerCase() + "@example.com").build();
+				.withPassword(ConfigLoader.getDefaultPassword()).withEmail(RandomStringUtils.randomAlphanumeric(5).toLowerCase() + "@example.com").build();
 	}
 
 	public static Request getValidUserRequest() {

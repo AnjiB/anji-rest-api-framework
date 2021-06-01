@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.anji.framework.api.enums.ApiContentType;
 import com.anji.framework.api.enums.ApiHeaders;
-import com.anji.framework.commons.config.ConfigLoader;
 
 
 /**
@@ -269,7 +268,7 @@ public class RequestBuilder {
 		
 		private String username;
 		
-		private String password = ConfigLoader.getConfig().get("PASSWORD");
+		private String password;
 		
 		private String requestBody;
 		
@@ -288,9 +287,7 @@ public class RequestBuilder {
 		private Map<String, String> cookeis;
 		
 		private Map<ApiHeaders, String> reqHeaders;
-		
-		private URL url;
-		
+				
 		private boolean isAuthRequired;
 		
 		private boolean isClientCached;
@@ -351,12 +348,7 @@ public class RequestBuilder {
 			this.reqHeaders = reqHeaders;
 			return this;
 		}
-		
-		public Builder withCompleteReqUrl(URL url) {
-			this.url = url;
-			return this;
-		}
-		
+				
 		public Builder withBaseUrl(String baseUrl) {
 			this.baseUrl = baseUrl;
 			return this;
@@ -385,7 +377,6 @@ public class RequestBuilder {
 			builder.setPathParameters(this.pathParameters);
 			builder.setCookies(this.cookeis);
 			builder.setReqHeaders(this.reqHeaders);
-			builder.setCompleteReqUrl(this.url);
 			builder.setBaseUrl(baseUrl);
 			builder.setAuthRequired(this.isAuthRequired);
 			builder.setClientCached(this.isClientCached);		

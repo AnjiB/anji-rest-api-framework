@@ -35,7 +35,7 @@ public class RegisterService {
 				.build();
 		ApiResponse<Response> response = new PostApiImpl<>(Response.class).post(builder);
 
-		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(HttpStatus.SC_CREATED);
 
 		return response.getResponse().getUser();
 	}

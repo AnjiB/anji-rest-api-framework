@@ -1,9 +1,9 @@
 package com.anji.test;
 
 import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.PostApiImpl;
+import com.anji.framework.commons.config.ConfigLoader;
 import com.anji.mendix.api.data.TestDataFactory;
 import com.anji.mendix.api.enus.Filter;
 import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
@@ -50,7 +51,9 @@ public class CreateArticleTest {
 		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(),
 				invalidArticleTestDataObject);
 
-		assertThat(response.getResponseCode()).isEqualTo(SC_BAD_REQUEST);
+		response.getResponse().articleAssertThat().errorAssert().errorMessageIs("Unexpected error");
+		
+		assertThat(response.getResponseCode()).isEqualTo(SC_UNPROCESSABLE_ENTITY);
 
 	}
 
@@ -65,7 +68,7 @@ public class CreateArticleTest {
 		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(),
 				requestObject);
 
-		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_CREATED);
 		ArticleRequestAndResponse aResponse = response.getResponse();
 
 		aResponse.articleAssertThat().thereIsNoError().articleBodyIs(requestObject.getArticle().getBody())
@@ -79,7 +82,7 @@ public class CreateArticleTest {
 		queryParam.put(Filter.author.name(), userRequest.getUser().getUsername());
 
 		ApiResponse<ArticlesResponse> articlesResponse = getArticleService.getArticles(queryParam);
-		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_CREATED);
 		articlesResponse.getResponse().assertThat().articleCountIs(1);
 
 	}
@@ -95,7 +98,7 @@ public class CreateArticleTest {
 		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(),
 				requestObject);
 
-		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_CREATED);
 		ArticleRequestAndResponse aResponse = response.getResponse();
 
 		aResponse.articleAssertThat().thereIsNoError().articleBodyIs(requestObject.getArticle().getBody())
@@ -109,7 +112,7 @@ public class CreateArticleTest {
 		queryParam.put(Filter.author.name(), userRequest.getUser().getUsername());
 
 		ApiResponse<ArticlesResponse> articlesResponse = getArticleService.getArticles(queryParam);
-		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_CREATED);
 		articlesResponse.getResponse().assertThat().articleCountIs(1);
 
 	}
@@ -121,17 +124,16 @@ public class CreateArticleTest {
 	public void testArticleCannotBeCreatedWithoutAuthorization() throws Exception {
 
 		ArticleRequestAndResponse requestObject = TestDataFactory.getValidArticle();
-		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(),
-				requestObject, false);
+		ApiResponse<ArticleRequestAndResponse> response = creatArticle.createArticle(userRequest.getUser().getEmail(), requestObject, false);
 		assertThat(response.getResponseCode()).isEqualTo(SC_UNAUTHORIZED);
 		response.getResponse().articleAssertThat().thereIsAnError().errorAssert()
-				.errorMessageIs("No authorization token was found").errorStatusIs(SC_UNAUTHORIZED);
+				.errorMessageIs("Unauthorized");
 
 	}
 
 	/*
 	 * This test is failing and it is a security issue. Token should be invalidated
-	 * as soon as user obtains new one.
+	 * as soon as user logins each time.
 	 */
 
 	@Test(description = "Testing if user can create the article with existing token.")
@@ -140,12 +142,12 @@ public class CreateArticleTest {
 		ArticleRequestAndResponse requestObject = TestDataFactory.getValidArticle();
 
 		RequestBuilder builder = new RequestBuilder.Builder().withUsername(userRequest.getUser().getEmail())
-				.withAuthRequired(true).withReqUrl(ARTICLES).withRequestObject(requestObject).withCachedClient()
+				.withPassword(ConfigLoader.getDefaultPassword()).withAuthRequired(true).withReqUrl(ARTICLES).withRequestObject(requestObject).withCachedClient()
 				.build();
 		ApiResponse<ArticleRequestAndResponse> response = new PostApiImpl<>(ArticleRequestAndResponse.class)
 				.post(builder);
 
-		assertThat(response.getResponseCode()).isEqualTo(SC_OK);
+		assertThat(response.getResponseCode()).isEqualTo(SC_CREATED);
 		ArticleRequestAndResponse aResponse = response.getResponse();
 
 		aResponse.articleAssertThat().thereIsNoError().articleBodyIs(requestObject.getArticle().getBody())

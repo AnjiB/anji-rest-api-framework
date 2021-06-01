@@ -1,5 +1,7 @@
 package com.anji.mendix.api.pojo;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -10,47 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ErrorsJson {
 
-	@JsonProperty("username")
-	private String username;
-	
-	@JsonProperty("email")
-	private String email;
-	
-	@JsonProperty("message")
-	private String message;
-	
-	@JsonProperty("error")
-	private ErrorJson error;
+	@JsonProperty("body")
+	private List<String> body;
 
-	public String getUsername() {
-		return username;
+	public List<String> getBody() {
+		return body;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public ErrorJson getError() {
-		return error;
-	}
-
-	public void setError(ErrorJson error) {
-		this.error = error;
+	public void setBody(List<String> body) {
+		this.body = body;
 	}
 }

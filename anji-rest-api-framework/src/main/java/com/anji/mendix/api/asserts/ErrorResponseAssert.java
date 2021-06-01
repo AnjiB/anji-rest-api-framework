@@ -21,15 +21,8 @@ public class ErrorResponseAssert extends AbstractAssert<ErrorResponseAssert, Err
 	}
 
 	public ErrorResponseAssert errorMessageIs(String expMessage) {
-		assertThat(actual.getMessage()).as(format(errorInfoMessage, expMessage, actual.getMessage()))
+		assertThat(actual.getBody().get(0)).as(format(errorInfoMessage, expMessage, actual.getBody().get(0)))
 				.isEqualTo(expMessage);
-		return this;
-	}
-
-	public ErrorResponseAssert errorStatusIs(int expStatus) {
-		assertThat(actual.getError()).isNotNull();
-		assertThat(actual.getError().getStatus())
-				.as(format(errorInfoMessage, expStatus, actual.getError().getStatus())).isEqualTo(expStatus);
 		return this;
 	}
 }

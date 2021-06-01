@@ -1,13 +1,7 @@
 DEV:
-   BASE_URL: "https://qa-task.backbasecloud.com"
-   USERNAME: ""
-   PASSWORD: "wachtwoord"
-   SUPER_USER: "candidatex"
-   SUPER_USER_PASSWORD: "qa-is-cool"
+   BASE_URL: "http://localhost:9000"
+   DEFAULT_PASSWORD: "wachtwoord"
 QA:
-  BASE_URL: "https://qa-task.backbasecloud.com"
-  USERNAME: ""
-  PASSWORD: "wachtwoord"
-  SUPER_USER: "candidatex"
-  SUPER_USER_PASSWORD: "qa-is-cool"
+  BASE_URL: "http://localhost:9000"
+  DEFAULT_PASSWORD: "wachtwoord"
   

@@ -4,7 +4,9 @@ import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
 import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.PostApiImpl;
+import com.anji.framework.commons.config.ConfigLoader;
 import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
+import com.anji.mendix.api.pojo.User;
 
 /**
  * 
@@ -22,17 +24,26 @@ public class CreateArticleService {
 		return new CreateArticleService();
 	}
 	
-	public ApiResponse<ArticleRequestAndResponse> createArticle(String username, ArticleRequestAndResponse ar, boolean authRequired) throws Exception {
+	public ApiResponse<ArticleRequestAndResponse> createArticle(String username, String password, ArticleRequestAndResponse ar, boolean authRequired) throws Exception {
 		
 		RequestBuilder builder = new RequestBuilder.Builder()
 				.withUsername(username)
+				.withPassword(password)
 				.withAuthRequired(authRequired)
 				.withReqUrl(ARTICLES).withRequestObject(ar).build();
 		return new PostApiImpl<>(ArticleRequestAndResponse.class).post(builder);
 	}
 	
 	
-	public ApiResponse<ArticleRequestAndResponse> createArticle(String username, ArticleRequestAndResponse ar) throws Exception {
-		return createArticle(username, ar, true);
+	public ApiResponse<ArticleRequestAndResponse> createArticle(String username, ArticleRequestAndResponse createArticleRequest) throws Exception {
+		return createArticle(username, ConfigLoader.getDefaultPassword(), createArticleRequest, true);
+	}
+	
+	public ApiResponse<ArticleRequestAndResponse> createArticle(String username, ArticleRequestAndResponse createArticleRequest, boolean authRequired) throws Exception {
+		return createArticle(username, ConfigLoader.getDefaultPassword(), createArticleRequest, authRequired);
+	}
+	
+	public ApiResponse<ArticleRequestAndResponse> createArticle(User user, ArticleRequestAndResponse createArticleRequest) throws Exception {
+		return createArticle(user.getEmail(), user.getPassword(), createArticleRequest, true);
 	}
 }

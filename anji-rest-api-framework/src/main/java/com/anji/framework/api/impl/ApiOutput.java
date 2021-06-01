@@ -9,7 +9,7 @@ import java.util.Map;
  * @author boddupally.anji
  *
  */
-public class ApiOutput {
+class ApiOutput {
 
 	private int responseCode;
 	
@@ -17,33 +17,33 @@ public class ApiOutput {
 	
 	private Map<String, String> responseHeaders;
 	
-	public ApiOutput(String responseString, int responseCode, Map<String, String> responseHeaders) {
+	ApiOutput(String responseString, int responseCode, Map<String, String> responseHeaders) {
 		this.responseString = responseString;
 		this.responseCode = responseCode;
 		this.responseHeaders = responseHeaders;
 	}
 
-	public int getResponseCode() {
+	int getResponseCode() {
 		return responseCode;
 	}
 
-	public void setResponseCode(int responseCode) {
+	void setResponseCode(int responseCode) {
 		this.responseCode = responseCode;
 	}
 
-	public String getResponseString() {
+	String getResponseString() {
 		return responseString;
 	}
 
-	public void setResponseString(String responseString) {
+	void setResponseString(String responseString) {
 		this.responseString = responseString;
 	}
 
-	public Map<String, String> getResponseHeaders() {
+	Map<String, String> getResponseHeaders() {
 		return responseHeaders;
 	}
 
-	public void setResponseHeaders(Map<String, String> responseHeaders) {
+	void setResponseHeaders(Map<String, String> responseHeaders) {
 		this.responseHeaders = responseHeaders;
 	}
 }

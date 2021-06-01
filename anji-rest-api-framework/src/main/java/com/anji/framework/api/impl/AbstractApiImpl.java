@@ -16,7 +16,7 @@ import com.anji.framework.api.utils.ConvertionUtil;
  *
  * @param <T>
  */
-public abstract class AbstractApiImpl<T> {
+abstract class AbstractApiImpl<T> {
 	
 	private static final Logger LOGGER  = Logger.getLogger(AbstractApiImpl.class);
 
