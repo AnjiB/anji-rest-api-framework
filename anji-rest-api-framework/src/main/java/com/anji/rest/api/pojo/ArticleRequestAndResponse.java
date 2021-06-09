@@ -1,6 +1,6 @@
-package com.anji.mendix.api.pojo;
+package com.anji.rest.api.pojo;
 
-import com.anji.mendix.api.asserts.ArticleResponseAssert;
+import com.anji.rest.api.asserts.ArticleResponseAssert;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

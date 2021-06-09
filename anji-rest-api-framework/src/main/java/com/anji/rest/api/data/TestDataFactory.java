@@ -1,12 +1,12 @@
-package com.anji.mendix.api.data;
+package com.anji.rest.api.data;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
 import com.anji.framework.commons.config.ConfigLoader;
-import com.anji.mendix.api.pojo.Article;
-import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
-import com.anji.mendix.api.pojo.Request;
-import com.anji.mendix.api.pojo.User;
+import com.anji.rest.api.pojo.Article;
+import com.anji.rest.api.pojo.ArticleRequestAndResponse;
+import com.anji.rest.api.pojo.Request;
+import com.anji.rest.api.pojo.User;
 
 /**
  * 

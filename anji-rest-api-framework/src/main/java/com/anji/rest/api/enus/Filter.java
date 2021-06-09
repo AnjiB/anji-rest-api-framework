@@ -1,4 +1,4 @@
-package com.anji.mendix.api.enus;
+package com.anji.rest.api.enus;
 
 /**
  * Enum for Get Article Request query parameter

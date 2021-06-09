@@ -1,4 +1,4 @@
-package com.anji.mendix.api.constants;
+package com.anji.rest.api.constants;
 
 /**
  * @author boddupally.anji

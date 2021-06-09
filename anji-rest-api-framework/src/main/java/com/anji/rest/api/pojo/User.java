@@ -1,4 +1,4 @@
-package com.anji.mendix.api.pojo;
+package com.anji.rest.api.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

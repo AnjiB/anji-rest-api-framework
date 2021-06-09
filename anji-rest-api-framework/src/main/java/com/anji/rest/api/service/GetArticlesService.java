@@ -1,12 +1,13 @@
-package com.anji.mendix.api.service;
+package com.anji.rest.api.service;
 
-import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
+import static com.anji.rest.api.constants.EndPoint.ARTICLES;
+
 import java.util.Map;
 
 import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.GetApiImpl;
-import com.anji.mendix.api.pojo.ArticlesResponse;
+import com.anji.rest.api.pojo.ArticlesResponse;
 
 /**
  * 

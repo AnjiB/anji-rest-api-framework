@@ -1,4 +1,4 @@
-package com.anji.mendix.api.asserts;
+package com.anji.rest.api.asserts;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.assertj.core.api.AbstractAssert;
 
-import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
+import com.anji.rest.api.pojo.ArticleRequestAndResponse;
 
 /**
  * Aritcle Response Assertions

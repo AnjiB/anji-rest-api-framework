@@ -2,7 +2,7 @@ package com.anji.test;
 
 import org.testng.annotations.DataProvider;
 
-import com.anji.mendix.api.data.TestDataFactory;
+import com.anji.rest.api.data.TestDataFactory;
 
 /**
  * 

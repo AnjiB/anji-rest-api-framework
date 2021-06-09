@@ -1,14 +1,15 @@
-package com.anji.mendix.api.service;
+package com.anji.rest.api.service;
 
+import static com.anji.rest.api.constants.EndPoint.LOGIN;
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.anji.mendix.api.constants.EndPoint.LOGIN;
+
 import org.apache.http.HttpStatus;
 
 import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.PostApiImpl;
-import com.anji.mendix.api.pojo.Request;
-import com.anji.mendix.api.pojo.Response;
+import com.anji.rest.api.pojo.Request;
+import com.anji.rest.api.pojo.Response;
 
 /**
  * 

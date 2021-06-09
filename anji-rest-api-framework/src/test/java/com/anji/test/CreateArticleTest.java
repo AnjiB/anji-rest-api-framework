@@ -1,6 +1,6 @@
 package com.anji.test;
 
-import static com.anji.mendix.api.constants.EndPoint.ARTICLES;
+import static com.anji.rest.api.constants.EndPoint.ARTICLES;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
@@ -15,15 +15,15 @@ import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.impl.ApiResponse;
 import com.anji.framework.api.impl.PostApiImpl;
 import com.anji.framework.commons.config.ConfigLoader;
-import com.anji.mendix.api.data.TestDataFactory;
-import com.anji.mendix.api.enus.Filter;
-import com.anji.mendix.api.pojo.ArticleRequestAndResponse;
-import com.anji.mendix.api.pojo.ArticlesResponse;
-import com.anji.mendix.api.pojo.Request;
-import com.anji.mendix.api.service.CreateArticleService;
-import com.anji.mendix.api.service.GetArticlesService;
-import com.anji.mendix.api.service.LoginService;
-import com.anji.mendix.api.service.RegisterService;
+import com.anji.rest.api.data.TestDataFactory;
+import com.anji.rest.api.enus.Filter;
+import com.anji.rest.api.pojo.ArticleRequestAndResponse;
+import com.anji.rest.api.pojo.ArticlesResponse;
+import com.anji.rest.api.pojo.Request;
+import com.anji.rest.api.service.CreateArticleService;
+import com.anji.rest.api.service.GetArticlesService;
+import com.anji.rest.api.service.LoginService;
+import com.anji.rest.api.service.RegisterService;
 import com.google.common.collect.Maps;
 
 public class CreateArticleTest {

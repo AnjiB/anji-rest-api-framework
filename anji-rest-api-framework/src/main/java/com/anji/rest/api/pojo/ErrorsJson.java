@@ -1,4 +1,4 @@
-package com.anji.mendix.api.pojo;
+package com.anji.rest.api.pojo;
 
 import java.util.List;
 
