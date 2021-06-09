@@ -3,10 +3,9 @@
 
 Thanks you providing me an opportunity to work on this assignment. I built a RestApi Framework to test these apis.
 
-* [Set Up AUT](#setup_aut)
+* [Set Up Application Under Test](#setup_aut)
 * [Tech Stack Used in Framework](#tech-stack-used-in-framework)
 * [Overview On Framework](#Overview-On-Framework)
-* [Testing](#testing)
 * [How to run the tests](#how-to-run-the-tests)
 * [Reporting](#reporting)
 
@@ -31,11 +30,6 @@ Framework is built on Java and below are the requirements to run the tests
 * Framework supports parallel test execution as we use TestNG as testing framework
 * Supports for Data Driven Testing (TestNG Supports Data Driven Testing Using dataProviders)
 
-## Testing
-
-* Written tests for Create Article API
-* There is one major security issue with API that Tokens are not getting invalidated.
-* I already built a framework for UI testing using Selenium and TestNG. Please refer for [reference](https://github.com/AnjiB/anji-selenium-projects/tree/master/AnjiSeleniumProject).
 
 ## How to run the tests
 * Go to root folder of the project
@@ -44,4 +38,4 @@ Framework is built on Java and below are the requirements to run the tests
 
 ## Reporting
 * Once the you run the tests, under root folder, you will see a folder with name `target/surefire-reports` will be generated.
-In the folder `surefire-reports` you will see emailable-report.html and index.html which tells you about the overall test status.
+In the folder `surefire-reports` you will see emailable-report.html and index.html which tells you about the overall test run status.
