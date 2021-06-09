@@ -1,4 +1,4 @@
-# Mendix API Assignment
+# Anji's - API Testing Framework Synopsis
 
 
 Thanks you providing me an opportunity to work on this assignment. I built a RestApi Framework to test these apis.
