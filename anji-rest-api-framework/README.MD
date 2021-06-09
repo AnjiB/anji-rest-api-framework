@@ -1,12 +1,17 @@
 # Mendix API Assignment
 
+
 Thanks you providing me an opportunity to work on this assignment. I built a RestApi Framework to test these apis.
 
+* [Set Up AUT](#setup_aut)
 * [Tech Stack Used in Framework](#tech-stack-used-in-framework)
 * [Overview On Framework](#Overview-On-Framework)
 * [Testing](#testing)
 * [How to run the tests](#how-to-run-the-tests)
 * [Reporting](#reporting)
+
+## Setup Aut
+Refer this [ReadME](https://github.com/AnjiB/anji-kot-lin/blob/master/README.md) to setup the application to test the APIs.
 
 ## Tech Stack Used in Framework
 
