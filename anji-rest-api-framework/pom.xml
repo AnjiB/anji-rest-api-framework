@@ -5,11 +5,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>backbase</groupId>
+	<groupId>AnjiRestApiProject</groupId>
 	<artifactId>anji-rest-api-framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>anji-mendix-assignment</name>
+	<name>anji-rest-api-framework</name>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
