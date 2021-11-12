@@ -2,7 +2,8 @@ package com.anji.framework.api.impl;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.anji.framework.api.builder.RequestBuilder;
 import com.google.common.base.Preconditions;
@@ -17,7 +18,7 @@ import com.google.common.cache.CacheBuilder;
  */
 class ClientService {
 
-	private static final Logger LOGGER = Logger.getLogger(ClientService.class);
+	private static final Logger LOGGER  = LogManager.getLogger(ClientService.class);
 	
 	private static ClientServiceCache cache = ClientServiceCache.getInstance();
 	

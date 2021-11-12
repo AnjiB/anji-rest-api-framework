@@ -1,6 +1,7 @@
 package com.anji.framework.commons.listeners;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -17,7 +18,7 @@ import com.anji.framework.commons.config.ConfigLoader;
 public class TestManagerListener implements ITestListener {
 
 	private Logger getLogger(String className) {
-		Logger logger = Logger.getLogger(className);
+		Logger logger = LogManager.getLogger(className);
 		return logger;
 
 	}

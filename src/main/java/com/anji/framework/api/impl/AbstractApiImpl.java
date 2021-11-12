@@ -1,7 +1,9 @@
 package com.anji.framework.api.impl;
 
 
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import com.anji.framework.api.enums.ApiContentType;
@@ -18,7 +20,7 @@ import com.anji.framework.api.utils.ConvertionUtil;
  */
 abstract class AbstractApiImpl<T> {
 	
-	private static final Logger LOGGER  = Logger.getLogger(AbstractApiImpl.class);
+	private static final Logger LOGGER  = LogManager.getLogger(AbstractApiImpl.class);
 
 	private Class<T> klass;
 

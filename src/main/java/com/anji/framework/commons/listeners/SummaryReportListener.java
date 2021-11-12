@@ -3,7 +3,8 @@ package com.anji.framework.commons.listeners;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.IReporter;
 import org.testng.ISuite;
 import org.testng.ISuiteResult;
@@ -19,7 +20,7 @@ import org.testng.xml.XmlSuite;
  */
 public class SummaryReportListener implements IReporter {
 
-	private static final Logger LOGGER = Logger.getLogger(SummaryReportListener.class);
+	private static final Logger LOGGER  = LogManager.getLogger(SummaryReportListener.class);
 
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {

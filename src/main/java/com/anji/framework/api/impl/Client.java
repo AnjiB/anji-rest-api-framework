@@ -41,7 +41,9 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.anji.framework.api.builder.RequestBuilder;
 import com.anji.framework.api.enums.ApiHeaders;
@@ -64,7 +66,7 @@ import com.google.common.collect.Maps;
  */
 class Client {
 
-	private static final Logger LOGGER = Logger.getLogger(Client.class);
+	private static final Logger LOGGER  = LogManager.getLogger(Client.class);
 
 	private int defaultWaitTime = 60;
 
