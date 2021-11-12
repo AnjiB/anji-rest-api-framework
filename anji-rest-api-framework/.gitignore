@@ -1,8 +1,0 @@
-/target/
-/test-output/
-*.class
-.DS_Store
-.classpath
-.project
-/.settings/
-/log/
